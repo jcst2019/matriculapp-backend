@@ -41,9 +41,7 @@ public class Apoderado {
     @Column(name="direccion", nullable = true, length = 200)
     private String direccion;
 
-    @Schema(description = "Teléfono debe de Tener mínimo 9 caracteres")
-    @Size(min = 9, max = 9, message = "Teléfono debe de Tener mínimo 9 caracteres")
-    @Column(name="telefono", nullable = true, length = 9)
+    @Column(name="telefono", nullable = true, length = 25)
     private String telefono;
 
     @Column(name = "fecha_nacimiento", nullable = true)

@@ -42,7 +42,7 @@ public class Alumno {
     @Schema(description = "Género debe de Tener 1 dígito")
     @Min(1)
     @Max(2)
-    @Column(name="genero", nullable = false)
+    @Column(name="genero", nullable = true)
     private Integer genero;
 
     @Schema(description = "DNI debe de Tener mínimo 8 caracteres")
@@ -55,8 +55,6 @@ public class Alumno {
     @Column(name="direccion", nullable = true, length = 200)
     private String direccion;
 
-    @Schema(description = "Teléfono debe de Tener mínimo 9 caracteres")
-    @Size(min = 9, max = 25,message = "Teléfono debe de Tener mínimo 9 caracteres")
     @Column(name="telefono", nullable = true,length = 25)
     private String telefono;
 
@@ -76,7 +74,7 @@ public class Alumno {
     @Column(name = "tipo_descuento", nullable = false)
     private Integer tipoDescuento;
 
-    @Column(name = "estado", nullable = false)
+    @Column(name = "estado", nullable = true)
     private Integer estado;
 
     public Integer getIdAlumno() {
