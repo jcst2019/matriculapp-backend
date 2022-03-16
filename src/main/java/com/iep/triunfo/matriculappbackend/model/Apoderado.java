@@ -28,7 +28,7 @@ public class Apoderado {
     private String apellidos;
 
     @Schema(description = "Género debe de Tener 1 dígito")
-    @Column(name="tipo", nullable = false)
+    @Column(name="tipo", nullable = true)
     private Integer tipo;
 
     @Schema(description = "DNI debe de Tener mínimo 8 caracteres")

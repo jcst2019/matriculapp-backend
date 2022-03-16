@@ -30,7 +30,7 @@ public class ProgramacionMatricula {
 
     @Schema(description = "Descripción debe de Tener máximo 200 caracteres")
     @Column(name = "descripcion", nullable = true, length = 200)
-    private String Descripción;
+    private String Descripcion;
 
     @Schema(description = "Cantidad de Cupos Total debe de Tener mínimo 1 dígito")
     @Min(1)
@@ -38,10 +38,7 @@ public class ProgramacionMatricula {
     @Column(name = "cupos_total", nullable = false)
     private Integer cantidadCuposTotal;
 
-    @Schema(description = "Cantidad de Cupos Registrados debe de Tener mínimo 1 dígito")
-    @Min(1)
-    @Max(200)
-    @Column(name = "cupos_registrados", nullable = false)
+    @Column(name = "cupos_registrados", nullable = true)
     private Integer cantidadCuposRegistrados;
 
     @Schema(description = "Año debe de Tener mínimo 4 caracteres")
@@ -50,20 +47,17 @@ public class ProgramacionMatricula {
     private String year;
 
     @Schema(description = "Grado debe de Tener 1 dígito")
-    @Min(1)
-    @Max(2)
-    @Column(name = "grado", nullable = false)
+    @Column(name = "grado", nullable = true)
     private Integer grado;
 
     @Schema(description = "Seccion debe de Tener 1 caracter")
-    @Size(min = 1, max = 1, message = "Seccion debe de Tener mínimo 1 caracter")
-    @Column(name = "seccion", nullable = false)
-    private String seccion;
+    @Column(name = "seccion", nullable = true)
+    private Integer seccion;
 
     @Schema(description = "Nivel debe de Tener 1 dígito")
     @Min(1)
-    @Max(2)
-    @Column(name = "nivel", nullable = false)
+    @Max(3)
+    @Column(name = "nivel", nullable = true)
     private Integer nivel;
 
     @Column(name = "mto_matricula", nullable = false)
@@ -94,12 +88,12 @@ public class ProgramacionMatricula {
         this.codigoMatricula = codigoMatricula;
     }
 
-    public String getDescripción() {
-        return Descripción;
+    public String getDescripcion() {
+        return Descripcion;
     }
 
-    public void setDescripción(String descripción) {
-        Descripción = descripción;
+    public void setDescripcion(String descripcion) {
+        Descripcion = descripcion;
     }
 
     public Integer getCantidadCuposTotal() {
@@ -134,11 +128,11 @@ public class ProgramacionMatricula {
         this.grado = grado;
     }
 
-    public String getSeccion() {
+    public Integer getSeccion() {
         return seccion;
     }
 
-    public void setSeccion(String seccion) {
+    public void setSeccion(Integer seccion) {
         this.seccion = seccion;
     }
 
@@ -148,6 +142,22 @@ public class ProgramacionMatricula {
 
     public void setNivel(Integer nivel) {
         this.nivel = nivel;
+    }
+
+    public Float getMontoMatricula() {
+        return montoMatricula;
+    }
+
+    public void setMontoMatricula(Float montoMatricula) {
+        this.montoMatricula = montoMatricula;
+    }
+
+    public Float getMontoMensualidad() {
+        return montoMensualidad;
+    }
+
+    public void setMontoMensualidad(Float montoMensualidad) {
+        this.montoMensualidad = montoMensualidad;
     }
 
     public LocalDateTime getFechaRegistro() {
