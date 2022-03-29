@@ -1,10 +1,8 @@
 package com.iep.triunfo.matriculappbackend.service.impl;
 
-import com.iep.triunfo.matriculappbackend.model.Alumno;
 import com.iep.triunfo.matriculappbackend.model.Cronograma;
-import com.iep.triunfo.matriculappbackend.repo.IAlumnoRepo;
+import com.iep.triunfo.matriculappbackend.model.Matricula;
 import com.iep.triunfo.matriculappbackend.repo.ICronogramaRepo;
-import com.iep.triunfo.matriculappbackend.service.IAlumnoService;
 import com.iep.triunfo.matriculappbackend.service.ICronogramaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +17,18 @@ public class CronogramaServiceImpl implements ICronogramaService {
     private ICronogramaRepo repo;
 
     @Override
+    public Float obtenerMontoDescuento(Matricula matricula) {
+        float descuento=0.0F;
+        Cronograma cronograma = new Cronograma();
+        descuento = cronograma.obtenerDescuentoMensualidad(matricula);
+        return descuento;
+    }
+
+    @Override
     public Cronograma registrar(Cronograma obj) {
+        obj.getDetalleCronograma().forEach(det->{
+            det.setCronograma(obj);
+        });
         return repo.save(obj);
     }
 
@@ -43,4 +52,6 @@ public class CronogramaServiceImpl implements ICronogramaService {
     public boolean eliminar(Integer id) {
         return false;
     }
+
+
 }

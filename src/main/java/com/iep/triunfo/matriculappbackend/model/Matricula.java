@@ -23,13 +23,14 @@ public class Matricula {
     @JoinColumn(name = "id_apoderado", nullable = false, foreignKey = @ForeignKey(name = "fk_apoderado_alumno"))
     private Apoderado apoderado;
 */
+    /*
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idProgMatricula", referencedColumnName = "idProgMatricula")
-    private ProgramacionMatricula programacionMatricula;
+    private ProgramacionMatricula programacionMatricula;*/
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idCronograma", referencedColumnName = "idCronograma")
-    private Cronograma cronograma;
+    @ManyToOne
+    @JoinColumn(name = "id_prog_matricula", nullable = false, foreignKey = @ForeignKey(name = "fk_matricula_programacion"))
+    private ProgramacionMatricula programacionMatricula;
 
     @Column(name = "fecha_matricula", nullable = true)
     private LocalDateTime fechaMatricula;
@@ -47,6 +48,14 @@ public class Matricula {
 
     public void setIdMatricula(Integer idMatricula) {
         this.idMatricula = idMatricula;
+    }
+
+    public ProgramacionMatricula getProgramacionMatricula() {
+        return programacionMatricula;
+    }
+
+    public void setProgramacionMatricula(ProgramacionMatricula programacionMatricula) {
+        this.programacionMatricula = programacionMatricula;
     }
 
     public LocalDateTime getFechaMatricula() {

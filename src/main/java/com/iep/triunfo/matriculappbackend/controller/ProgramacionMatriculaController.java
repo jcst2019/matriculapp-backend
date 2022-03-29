@@ -5,6 +5,7 @@ import com.iep.triunfo.matriculappbackend.model.Matricula;
 import com.iep.triunfo.matriculappbackend.model.ProgramacionMatricula;
 import com.iep.triunfo.matriculappbackend.service.IMatriculaService;
 import com.iep.triunfo.matriculappbackend.service.IPorgramacionMatriculaService;
+import com.iep.triunfo.matriculappbackend.util.DatoRetorno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,19 @@ public class ProgramacionMatriculaController {
 
 	@Autowired
 	private IPorgramacionMatriculaService service;
+
+	@PostMapping("/actualizarcantidadcupos/{id}")
+	public ResponseEntity<ProgramacionMatricula> actualizarCantidadCupos(@PathVariable("id") Integer id) {
+
+		ProgramacionMatricula p = service.listarPorId(id);
+		ProgramacionMatricula progActualizado;
+		if (p.getIdProgMatricula()== null) {
+			throw new ModeloNotFoundException("Id No encontrado " + id);
+		}else{
+			 progActualizado = service.actualizarCantidadCupos(p);
+		}
+		return new ResponseEntity<ProgramacionMatricula>(progActualizado, HttpStatus.OK);
+	}
 
 	@GetMapping("/listar")
 	public ResponseEntity<List<ProgramacionMatricula>> listar() {

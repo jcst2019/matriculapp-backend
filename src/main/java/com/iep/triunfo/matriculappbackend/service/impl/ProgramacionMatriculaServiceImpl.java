@@ -1,5 +1,6 @@
 package com.iep.triunfo.matriculappbackend.service.impl;
 
+import com.iep.triunfo.matriculappbackend.model.Cronograma;
 import com.iep.triunfo.matriculappbackend.model.Matricula;
 import com.iep.triunfo.matriculappbackend.model.ProgramacionMatricula;
 import com.iep.triunfo.matriculappbackend.repo.IMatriculaRepo;
@@ -19,6 +20,18 @@ public class ProgramacionMatriculaServiceImpl implements IPorgramacionMatriculaS
     private IProgramacionMatriculaRepo repo;
 
     @Override
+    public ProgramacionMatricula actualizarCantidadCupos(ProgramacionMatricula programacionMatricula) {
+        int cantidadCupos,cantidadCuposTotal;
+        cantidadCuposTotal =  programacionMatricula.getCantidadCuposTotal();
+        cantidadCupos = programacionMatricula.getCantidadCuposRegistrados();
+        if (cantidadCuposTotal>=cantidadCupos){
+            programacionMatricula.setCantidadCuposRegistrados(cantidadCupos + 1);
+            return repo.save(programacionMatricula);
+        }
+        return new ProgramacionMatricula();
+    }
+
+    @Override
     public ProgramacionMatricula registrar(ProgramacionMatricula obj) {
         return repo.save(obj);
     }
@@ -26,6 +39,7 @@ public class ProgramacionMatriculaServiceImpl implements IPorgramacionMatriculaS
     @Override
     public ProgramacionMatricula modificar(ProgramacionMatricula obj) {
         return repo.save(obj);
+
     }
 
     @Override
@@ -44,4 +58,5 @@ public class ProgramacionMatriculaServiceImpl implements IPorgramacionMatriculaS
         repo.deleteById(id);
         return true;
     }
+
 }

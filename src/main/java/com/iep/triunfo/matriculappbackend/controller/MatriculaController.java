@@ -2,9 +2,14 @@ package com.iep.triunfo.matriculappbackend.controller;
 
 import com.iep.triunfo.matriculappbackend.exception.ModeloNotFoundException;
 import com.iep.triunfo.matriculappbackend.model.Alumno;
+import com.iep.triunfo.matriculappbackend.model.Cronograma;
 import com.iep.triunfo.matriculappbackend.model.Matricula;
+import com.iep.triunfo.matriculappbackend.model.ProgramacionMatricula;
+import com.iep.triunfo.matriculappbackend.repo.IProgramacionMatriculaRepo;
 import com.iep.triunfo.matriculappbackend.service.IAlumnoService;
+import com.iep.triunfo.matriculappbackend.service.ICronogramaService;
 import com.iep.triunfo.matriculappbackend.service.IMatriculaService;
+import com.iep.triunfo.matriculappbackend.service.IPorgramacionMatriculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -22,6 +28,10 @@ public class MatriculaController {
 
 	@Autowired
 	private IMatriculaService service;
+	@Autowired
+	private ICronogramaService serviceCronograma;
+	@Autowired
+	private IPorgramacionMatriculaService serviceProgramacionMatricula;
 
 	@GetMapping("/listar")
 	public ResponseEntity<List<Matricula>> listar() {
@@ -29,6 +39,7 @@ public class MatriculaController {
 		List<Matricula> lista = service.listar();
 		return new ResponseEntity<List<Matricula>>(lista, HttpStatus.OK);
 	}
+
 
 	@GetMapping("/listar/{id}")
 	public ResponseEntity<Matricula> listarPorId(@PathVariable("id") Integer id) {
@@ -65,8 +76,18 @@ public class MatriculaController {
 
 	@PostMapping("/registrar")
 	public ResponseEntity<Object> registrar(@Valid @RequestBody Matricula matricula) {
-
+        Cronograma cronograma = new Cronograma();
+        //Registramos la Matrícula
 		Matricula p = service.registrar(matricula);
+        //Registramos el Cronograma
+		cronograma.setMatricula(p);
+		cronograma.setEstado(0);
+		cronograma.setFechaCronograma(LocalDateTime.now());
+		cronograma.generarDetalleCronograma(matricula);
+		Cronograma c = serviceCronograma.registrar(cronograma);
+		//Actualizamos la cantidad de Cupos Matriculados
+		ProgramacionMatricula progActualizado = serviceProgramacionMatricula.listarPorId(matricula.getProgramacionMatricula().getIdProgMatricula());
+		progActualizado = serviceProgramacionMatricula.actualizarCantidadCupos(progActualizado);
 		// return new ResponseEntity<Paciente>(p, HttpStatus.CREATED);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getIdMatricula())
 				.toUri();

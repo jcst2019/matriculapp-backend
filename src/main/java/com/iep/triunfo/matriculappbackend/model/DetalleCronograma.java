@@ -1,5 +1,6 @@
 package com.iep.triunfo.matriculappbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ public class DetalleCronograma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idDetalleCronograma;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_cronograma", nullable = false, foreignKey = @ForeignKey(name = "fk_cronograma_detalle"))
     private Cronograma cronograma;
@@ -25,10 +27,13 @@ public class DetalleCronograma {
     private Float montoSistema;
 
     @Column(name = "monto_descuento", nullable = false)
-    private Float montoDescuento;
+    private double montoDescuento;
 
     @Column(name = "monto_pagar", nullable = false)
-    private Float montoPagar;
+    private double montoPagar;
+
+    @Column(name = "monto_pagado", nullable = false)
+    private Float montoPagado;
 
     @Column(name = "estado", nullable = false)
     private Integer estado;
@@ -71,20 +76,28 @@ public class DetalleCronograma {
         this.montoSistema = montoSistema;
     }
 
-    public Float getMontoDescuento() {
+    public double getMontoDescuento() {
         return montoDescuento;
     }
 
-    public void setMontoDescuento(Float montoDescuento) {
+    public void setMontoDescuento(double montoDescuento) {
         this.montoDescuento = montoDescuento;
     }
 
-    public Float getMontoPagar() {
+    public double getMontoPagar() {
         return montoPagar;
     }
 
-    public void setMontoPagar(Float montoPagar) {
+    public void setMontoPagar(double montoPagar) {
         this.montoPagar = montoPagar;
+    }
+
+    public Float getMontoPagado() {
+        return montoPagado;
+    }
+
+    public void setMontoPagado(Float montoPagado) {
+        this.montoPagado = montoPagado;
     }
 
     public Integer getEstado() {
