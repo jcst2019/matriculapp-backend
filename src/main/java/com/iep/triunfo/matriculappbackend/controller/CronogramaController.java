@@ -1,7 +1,9 @@
 package com.iep.triunfo.matriculappbackend.controller;
 
+import com.fasterxml.jackson.databind.DatabindException;
 import com.iep.triunfo.matriculappbackend.exception.ModeloNotFoundException;
 import com.iep.triunfo.matriculappbackend.model.Cronograma;
+import com.iep.triunfo.matriculappbackend.model.DetalleCronograma;
 import com.iep.triunfo.matriculappbackend.util.DatoRetorno;
 import com.iep.triunfo.matriculappbackend.model.Matricula;
 import com.iep.triunfo.matriculappbackend.service.ICronogramaService;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -57,6 +60,15 @@ public class CronogramaController {
 		return new ResponseEntity<Cronograma>(p, HttpStatus.OK);
 
 	}
+
+	@GetMapping("/listardetalle/matricula/{id}")
+	public ResponseEntity<Cronograma> listar(@PathVariable("id") Integer id) throws Exception{
+		//List<Cronograma> cronograma = new ArrayList<>();
+		//cronograma = service.listarCronogramaPorMatricula(id);
+		Cronograma cronograma = service.listarCronogramaPorMatricula(id);
+		return new ResponseEntity<Cronograma>(cronograma, HttpStatus.OK);
+	}
+
 
 	@PostMapping("/registrar")
 	public ResponseEntity<Object> registrar(@Valid @RequestBody Cronograma cronograma) {

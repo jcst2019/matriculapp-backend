@@ -123,4 +123,5 @@ public class DetalleCronograma {
     public void setFechaModificacion(LocalDateTime fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
+
 }
