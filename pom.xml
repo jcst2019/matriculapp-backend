@@ -90,12 +90,26 @@
 	</build>
 	-->
 	<build>
-		<directory>${project.basedir}/target</directory>
-		<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-		<testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
 		<resources>
 			<resource>
-				<directory>${project.basedir}/src/main/resources</directory>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+					<include>**/*.tld</include>
+					<include>**/*.jasper</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+					<include>**/*.tld</include>
+					<include>**/*.jasper</include>
+				</includes>
+				<filtering>false</filtering>
 			</resource>
 		</resources>
 		<plugins>
