@@ -13,6 +13,9 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -58,10 +61,15 @@ public class MatriculaServiceImpl implements IMatriculaService {
 
     @Override
     public byte[] generarConstanciaMatricula(Integer id) {
+
+        ResourceLoader resourceLoader = new DefaultResourceLoader();
+        Resource resource = resourceLoader.getResource("ConstanciaMatricula.jasper");
         byte[] data = null;
 
         try {
-            File file = new ClassPathResource("/reports/ConstanciaMatricula.jasper").getFile();//Funciona Pero en el despliegue NO. No encuentra la ruta de la carpeta resource
+            //File file = new ClassPathResource("/reports/ConstanciaMatricula.jasper").getFile();//Funciona Pero en el despliegue NO. No encuentra la ruta de la carpeta resource
+            //JasperPrint print = JasperFillManager.fillReport(file.getPath(), null, new JRBeanCollectionDataSource(Collections.singleton(this.listarPorId(id))));
+            File file = resource.getFile();
             JasperPrint print = JasperFillManager.fillReport(file.getPath(), null, new JRBeanCollectionDataSource(Collections.singleton(this.listarPorId(id))));
             data = JasperExportManager.exportReportToPdf(print);
         }catch(Exception e) {
