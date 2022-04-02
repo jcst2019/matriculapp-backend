@@ -21,6 +21,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -63,7 +64,7 @@ public class MatriculaServiceImpl implements IMatriculaService {
         repo.deleteById(id);
         return true;
     }
-
+/*
     @Override
     public byte[] generarConstanciaMatricula(Integer id) {
 
@@ -93,6 +94,25 @@ public class MatriculaServiceImpl implements IMatriculaService {
 
         return data;
     }
+    */
+    @Override
+    public byte[] generarConstanciaMatricula(Integer id) {
+
+        //URL resource = getClass().getResource("constancia.jasper");}
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL resource = classLoader.getResource("constancia.jasper");
+        final String JASPER_DIRETORIO = resource.getFile();
+        JasperPrint jasperPrint = null;
+        byte[] data = null;
+        try {
+            jasperPrint = JasperFillManager.fillReport(JASPER_DIRETORIO, null, new JRBeanCollectionDataSource(Collections.singleton(this.listarPorId(id))));
+            data = JasperExportManager.exportReportToPdf(jasperPrint);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
     public void copyToFile(InputStream inputStream, File file) throws IOException {
         try(OutputStream outputStream = new FileOutputStream(file)) {
             IOUtils.copy(inputStream, outputStream);
