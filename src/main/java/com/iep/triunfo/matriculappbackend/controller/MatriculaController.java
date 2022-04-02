@@ -12,6 +12,7 @@ import com.iep.triunfo.matriculappbackend.service.IMatriculaService;
 import com.iep.triunfo.matriculappbackend.service.IPorgramacionMatriculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -116,6 +117,13 @@ public class MatriculaController {
 		}
 		service.eliminar(id);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+	}
+
+	@GetMapping(value = "/generarConstanciaMatricula/{id}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public ResponseEntity<byte[]> generarConstanciaMatricula(@PathVariable("id") Integer id) {
+		byte[] data = null;
+		data = service.generarConstanciaMatricula(id);
+		return new ResponseEntity<byte[]>(data, HttpStatus.OK);
 	}
 
 }

@@ -2,6 +2,7 @@ package com.iep.triunfo.matriculappbackend.controller;
 
 import com.iep.triunfo.matriculappbackend.exception.ModeloNotFoundException;
 import com.iep.triunfo.matriculappbackend.model.Alumno;
+import com.iep.triunfo.matriculappbackend.model.Cronograma;
 import com.iep.triunfo.matriculappbackend.service.IAlumnoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,6 +42,14 @@ public class AlumnoController {
 		}
 		return new ResponseEntity<Alumno>(p, HttpStatus.OK);
 
+	}
+
+	@GetMapping("/listar/programacion/{id}")
+	public ResponseEntity<List<Alumno>> listarPorProgramacion(@PathVariable("id") Integer id) throws Exception{
+		//List<Cronograma> cronograma = new ArrayList<>();
+		//cronograma = service.listarCronogramaPorMatricula(id);
+		List<Alumno> alumnos= service.listarAlumnosPorProgramacion(id);
+		return new ResponseEntity<List<Alumno>>(alumnos, HttpStatus.OK);
 	}
 	/*
 	@GetMapping("/hateos/listar/{id}")

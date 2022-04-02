@@ -42,4 +42,10 @@ public class AlumnoServiceImpl implements IAlumnoService {
         repo.deleteById(id);
         return true;
     }
+
+    @Override
+    public List<Alumno> listarAlumnosPorProgramacion(Integer id) {
+        return repo.listarAlumnosPorProgramacion(id);
+    }
+
 }
