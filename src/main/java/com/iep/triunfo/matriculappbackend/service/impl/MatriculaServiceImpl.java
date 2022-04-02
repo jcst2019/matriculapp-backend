@@ -65,6 +65,8 @@ public class MatriculaServiceImpl implements IMatriculaService {
     public byte[] generarConstanciaMatricula(Integer id) {
 
         Resource resource = resourceLoader.getResource("classpath:/reports/ConstanciaMatricula.jasper");
+        getClass().getResource("classpath:/reports/ConstanciaMatricula.jasper");
+
         byte[] data = null;
 
         try {
