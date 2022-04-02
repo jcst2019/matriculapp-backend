@@ -20,6 +20,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.ServletContext;
 import java.io.*;
 import java.net.URL;
 import java.util.Collections;
@@ -37,6 +38,9 @@ public class MatriculaServiceImpl implements IMatriculaService {
 
     @Autowired
     ResourceLoader resourceLoader;
+
+    @Autowired
+    ServletContext servletContext;
 
     @Override
     public Matricula registrar(Matricula obj) {
@@ -95,6 +99,7 @@ public class MatriculaServiceImpl implements IMatriculaService {
         return data;
     }
     */
+    /*
     @Override
     public byte[] generarConstanciaMatricula(Integer id) {
 
@@ -106,6 +111,26 @@ public class MatriculaServiceImpl implements IMatriculaService {
         byte[] data = null;
         try {
             jasperPrint = JasperFillManager.fillReport(JASPER_DIRETORIO, null, new JRBeanCollectionDataSource(Collections.singleton(this.listarPorId(id))));
+            data = JasperExportManager.exportReportToPdf(jasperPrint);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }*/
+
+    @Override
+    public byte[] generarConstanciaMatricula(Integer id) {
+
+        String path = servletContext.getRealPath("reports");
+
+        //ClassLoader classLoader = getClass().getClassLoader();
+        //URL resource = classLoader.getResource("constancia.jasper");
+        //final String JASPER_DIRETORIO = resource.getFile();
+        JasperPrint jasperPrint = null;
+        byte[] data = null;
+        try {
+            //jasperPrint = JasperFillManager.fillReport(JASPER_DIRETORIO, null, new JRBeanCollectionDataSource(Collections.singleton(this.listarPorId(id))));
+            jasperPrint = JasperFillManager.fillReport(servletContext.getRealPath("constancia.jasper"), null, new JRBeanCollectionDataSource(Collections.singleton(this.listarPorId(id))));
             data = JasperExportManager.exportReportToPdf(jasperPrint);
         } catch (Exception e) {
             e.printStackTrace();
