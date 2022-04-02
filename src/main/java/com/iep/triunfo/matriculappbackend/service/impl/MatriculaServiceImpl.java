@@ -19,9 +19,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -32,11 +30,11 @@ public class MatriculaServiceImpl implements IMatriculaService {
     @Autowired
     private IMatriculaRepo repo;
 
-    @Value("classpath:/constancia.jasper") // Do not use field injection
-    private Resource resource;
+    //@Value("classpath:/constancia.jasper") // Do not use field injection
+    //private Resource resource;
 
-    //@Autowired
-    //ResourceLoader resourceLoader;
+    @Autowired
+    ResourceLoader resourceLoader;
 
     @Override
     public Matricula registrar(Matricula obj) {
@@ -68,15 +66,22 @@ public class MatriculaServiceImpl implements IMatriculaService {
     @Override
     public byte[] generarConstanciaMatricula(Integer id) {
 
-        //Resource resource = resourceLoader.getResource("classpath:constancia.jasper");
+        Resource resource = resourceLoader.getResource("classpath:constancia.jasper");
+
 
         byte[] data = null;
 
         try {
             //File file = new ClassPathResource("/reports/constancia.jasper").getFile();//Funciona Pero en el despliegue NO. No encuentra la ruta de la carpeta resource
             //JasperPrint print = JasperFillManager.fillReport(file.getPath(), null, new JRBeanCollectionDataSource(Collections.singleton(this.listarPorId(id))));
+            InputStream input = resource.getInputStream();
             File file = resource.getFile();
-            JasperPrint print = JasperFillManager.fillReport(file.getPath(), null, new JRBeanCollectionDataSource(Collections.singleton(this.listarPorId(id))));
+            //File file = resource.getFile();
+
+
+            //JasperPrint print = JasperFillManager.fillReport(file.getPath(), null, new JRBeanCollectionDataSource(Collections.singleton(this.listarPorId(id))));
+            JasperPrint print = JasperFillManager.fillReport(file.getPath() , null, new JRBeanCollectionDataSource(Collections.singleton(this.listarPorId(id))));
+
             data = JasperExportManager.exportReportToPdf(print);
         }catch(Exception e) {
             e.printStackTrace();
