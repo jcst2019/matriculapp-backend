@@ -11,6 +11,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.DefaultResourceLoader;
@@ -31,8 +32,11 @@ public class MatriculaServiceImpl implements IMatriculaService {
     @Autowired
     private IMatriculaRepo repo;
 
-    @Autowired
-    ResourceLoader resourceLoader = new DefaultResourceLoader();
+    @Value("classpath:/ConstanciaMatricula.jasper") // Do not use field injection
+    private Resource resource;
+
+    //@Autowired
+    //ResourceLoader resourceLoader;
 
     @Override
     public Matricula registrar(Matricula obj) {
@@ -64,8 +68,7 @@ public class MatriculaServiceImpl implements IMatriculaService {
     @Override
     public byte[] generarConstanciaMatricula(Integer id) {
 
-        Resource resource = resourceLoader.getResource("classpath:ConstanciaMatricula.jasper");
-        getClass().getResource("classpath:/reports/ConstanciaMatricula.jasper");
+        //Resource resource = resourceLoader.getResource("classpath:ConstanciaMatricula.jasper");
 
         byte[] data = null;
 
