@@ -74,20 +74,8 @@
 			<version>6.18.0</version>
 		</dependency>
 	</dependencies>
-
+   <!--
 	<build>
-		<resources>
-			<resource>
-				<directory>${project.basedir}/src/main/resources</directory>
-				<filtering>true</filtering>
-				<includes>
-					<include>**/*.properties</include>
-					<include>**/*.yml</include>
-					<include>**/*.yaml</include>
-					<include>**/*.json</include>
-				</includes>
-			</resource>
-		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -99,5 +87,37 @@
 				<version>3.0.2</version>
 			</plugin>
 		</plugins>
+	</build>
+	-->
+	<build>
+		<directory>${project.basedir}/target</directory>
+		<outputDirectory>${project.build.directory}/classes</outputDirectory>
+		<finalName>${project.artifactId}-${project.version}</finalName>
+		<testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
+		<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+		<testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>${project.basedir}/src/test/resources</directory>
+			</testResource>
+		</testResources>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 </project>
