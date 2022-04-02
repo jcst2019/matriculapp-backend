@@ -31,6 +31,8 @@ public class MatriculaServiceImpl implements IMatriculaService {
     @Autowired
     private IMatriculaRepo repo;
 
+    @Autowired
+    ResourceLoader resourceLoader = new DefaultResourceLoader();
 
     @Override
     public Matricula registrar(Matricula obj) {
@@ -62,8 +64,7 @@ public class MatriculaServiceImpl implements IMatriculaService {
     @Override
     public byte[] generarConstanciaMatricula(Integer id) {
 
-        ResourceLoader resourceLoader = new DefaultResourceLoader();
-        Resource resource = resourceLoader.getResource("/reports/ConstanciaMatricula.jasper");
+        Resource resource = resourceLoader.getResource("classpath:/reports/ConstanciaMatricula.jasper");
         byte[] data = null;
 
         try {
