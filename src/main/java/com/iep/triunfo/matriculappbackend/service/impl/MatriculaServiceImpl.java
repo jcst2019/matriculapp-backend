@@ -32,7 +32,7 @@ public class MatriculaServiceImpl implements IMatriculaService {
     @Autowired
     private IMatriculaRepo repo;
 
-    @Value("classpath:/ConstanciaMatricula.jasper") // Do not use field injection
+    @Value("classpath:/constancia.jasper") // Do not use field injection
     private Resource resource;
 
     //@Autowired
@@ -68,12 +68,12 @@ public class MatriculaServiceImpl implements IMatriculaService {
     @Override
     public byte[] generarConstanciaMatricula(Integer id) {
 
-        //Resource resource = resourceLoader.getResource("classpath:ConstanciaMatricula.jasper");
+        //Resource resource = resourceLoader.getResource("classpath:constancia.jasper");
 
         byte[] data = null;
 
         try {
-            //File file = new ClassPathResource("/reports/ConstanciaMatricula.jasper").getFile();//Funciona Pero en el despliegue NO. No encuentra la ruta de la carpeta resource
+            //File file = new ClassPathResource("/reports/constancia.jasper").getFile();//Funciona Pero en el despliegue NO. No encuentra la ruta de la carpeta resource
             //JasperPrint print = JasperFillManager.fillReport(file.getPath(), null, new JRBeanCollectionDataSource(Collections.singleton(this.listarPorId(id))));
             File file = resource.getFile();
             JasperPrint print = JasperFillManager.fillReport(file.getPath(), null, new JRBeanCollectionDataSource(Collections.singleton(this.listarPorId(id))));
