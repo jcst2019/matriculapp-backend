@@ -23,6 +23,7 @@ public class PagoController {
 	@Autowired
 	private IPagoService service;
 
+
 	@GetMapping("/listar")
 	public ResponseEntity<List<Pago>> listar() {
 

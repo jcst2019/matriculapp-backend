@@ -28,8 +28,18 @@ public class Pago {
     @Column(name = "concepto", nullable = false)
     private Integer concepto;
 
+    //@Column(name = "id_detalle_cronograma", nullable = false)
+    //private Long idDetalleCronograma;
+
+    //Transient // Es un campo que no se represeta en la BD
+    //private Cronograma cronograma;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cronograma", nullable = false, foreignKey = @ForeignKey(name = "fk_pago_ronograma"))
+    private Cronograma cronograma ;
+
     @Column(name = "id_detalle_cronograma", nullable = false)
-    private Long idDetalleCronograma;
+    private Integer idDetalleCronograma ;
 
     @Column(name = "mto_pago", nullable = true)
     private Float mtoPago;
@@ -67,11 +77,19 @@ public class Pago {
         this.concepto = concepto;
     }
 
-    public Long getIdDetalleCronograma() {
+    public Cronograma getCronograma() {
+        return cronograma;
+    }
+
+    public void setCronograma(Cronograma cronograma) {
+        this.cronograma = cronograma;
+    }
+
+    public Integer getIdDetalleCronograma() {
         return idDetalleCronograma;
     }
 
-    public void setIdDetalleCronograma(Long idDetalleCronograma) {
+    public void setIdDetalleCronograma(Integer idDetalleCronograma) {
         this.idDetalleCronograma = idDetalleCronograma;
     }
 
