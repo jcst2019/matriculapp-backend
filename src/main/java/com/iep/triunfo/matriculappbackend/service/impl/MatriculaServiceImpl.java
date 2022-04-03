@@ -138,6 +138,7 @@ public class MatriculaServiceImpl implements IMatriculaService {
         return data;
     }*/
 
+    //Después de sufrir como 1 día se pudo visualizar el PDF desde HEROKU
     @Override
     public byte[] generarConstanciaMatricula(Integer id) {
 
