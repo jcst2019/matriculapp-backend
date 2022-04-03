@@ -117,7 +117,7 @@ public class MatriculaServiceImpl implements IMatriculaService {
         }
         return data;
     }*/
-
+ /*
     @Override
     public byte[] generarConstanciaMatricula(Integer id) {
 
@@ -135,6 +135,36 @@ public class MatriculaServiceImpl implements IMatriculaService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return data;
+    }*/
+
+    @Override
+    public byte[] generarConstanciaMatricula(Integer id) {
+
+        Resource resource = resourceLoader.getResource("classpath:constancia.jasper");
+        ClassLoader classLoader = getClass().getClassLoader();
+
+        byte[] data = null;
+
+        try {
+            //File file = new ClassPathResource("/reports/constancia.jasper").getFile();//Funciona Pero en el despliegue NO. No encuentra la ruta de la carpeta resource
+            //JasperPrint print = JasperFillManager.fillReport(file.getPath(), null, new JRBeanCollectionDataSource(Collections.singleton(this.listarPorId(id))));
+            //InputStream input = resource.getInputStream();
+            InputStream input =  classLoader.getResourceAsStream("constancia.jasper");
+            //readFromInputStream(input);
+            //reader = new BufferedReader(new InputStreamReader(input));
+            //byte[] buffer = new byte[input.available()];
+            //input.read(buffer);
+            //File file = resource.getFile();
+            //File file = new File(classLoader.getResource("constancia.jasper").getFile());
+            //JasperPrint print = JasperFillManager.fillReport(file.getPath(), null, new JRBeanCollectionDataSource(Collections.singleton(this.listarPorId(id))));
+            JasperPrint print = JasperFillManager.fillReport(input , null, new JRBeanCollectionDataSource(Collections.singleton(this.listarPorId(id))));
+
+            data = JasperExportManager.exportReportToPdf(print);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+
         return data;
     }
 
