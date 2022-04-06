@@ -69,6 +69,14 @@ public class CronogramaController {
 		return new ResponseEntity<Cronograma>(cronograma, HttpStatus.OK);
 	}
 
+	@GetMapping("/listardetalle/alumno/{id}")
+	public ResponseEntity<List<Cronograma>> listarCronogramaPorAlumno(@PathVariable("id") Integer id) throws Exception{
+		//List<Cronograma> cronograma = new ArrayList<>();
+		//cronograma = service.listarCronogramaPorMatricula(id);
+		List<Cronograma> listCronograma = service.listarCronogramaPorAlumno(id);
+		return new ResponseEntity<List<Cronograma>>(listCronograma, HttpStatus.OK);
+	}
+
 
 	@PostMapping("/registrar")
 	public ResponseEntity<Object> registrar(@Valid @RequestBody Cronograma cronograma) {

@@ -17,5 +17,15 @@ public interface ICronogramaRepo extends JpaRepository<Cronograma, Integer> {
 
     Cronograma listarCronogramaPorMatricula(@Param("id") Integer id);
 
+    @Query(value="select a.* from cronograma a\n" +
+                 "inner join matricula b\n" +
+                 "on a.id_matricula = b.id_matricula\n" +
+                 "inner join alumno c\n" +
+                 "on b.id_alumno= c.id_alumno\n" +
+                 "where a.estado = 0\n" +
+                 "and c.id_alumno=:id", nativeQuery = true)
+
+    List<Cronograma> listarCronogramaPorAlumno(@Param("id") Integer id);
+
 
 }

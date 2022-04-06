@@ -1,5 +1,6 @@
 package com.iep.triunfo.matriculappbackend.service.impl;
 
+import com.iep.triunfo.matriculappbackend.model.Alumno;
 import com.iep.triunfo.matriculappbackend.model.Cronograma;
 import com.iep.triunfo.matriculappbackend.model.DetalleCronograma;
 import com.iep.triunfo.matriculappbackend.model.Matricula;
@@ -28,6 +29,12 @@ public class CronogramaServiceImpl implements ICronogramaService {
     @Override
     public Cronograma listarCronogramaPorMatricula(Integer id) {
         return repo.listarCronogramaPorMatricula(id);
+    }
+
+    @Override
+    public List<Cronograma> listarCronogramaPorAlumno(Integer id) {
+        List<Cronograma> listaCronograma = repo.listarCronogramaPorAlumno(id);
+        return listaCronograma;
     }
 
     @Override

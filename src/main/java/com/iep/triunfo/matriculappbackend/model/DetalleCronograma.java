@@ -33,7 +33,7 @@ public class DetalleCronograma {
     private double montoPagar;
 
     @Column(name = "monto_pagado", nullable = false)
-    private Float montoPagado;
+    private double montoPagado;
 
     @Column(name = "estado", nullable = false)
     private Integer estado;
@@ -92,11 +92,11 @@ public class DetalleCronograma {
         this.montoPagar = montoPagar;
     }
 
-    public Float getMontoPagado() {
+    public double getMontoPagado() {
         return montoPagado;
     }
 
-    public void setMontoPagado(Float montoPagado) {
+    public void setMontoPagado(double montoPagado) {
         this.montoPagado = montoPagado;
     }
 
