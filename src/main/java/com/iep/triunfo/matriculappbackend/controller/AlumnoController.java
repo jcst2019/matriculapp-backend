@@ -18,7 +18,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 
 @RestController
-@RequestMapping("/api/alumnos")
+@RequestMapping("api/alumnos")
 public class AlumnoController {
 
 	@Autowired

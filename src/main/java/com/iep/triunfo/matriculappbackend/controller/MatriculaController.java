@@ -24,7 +24,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/matriculas")
+@RequestMapping("api/matriculas")
 public class MatriculaController {
 
 	@Autowired

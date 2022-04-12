@@ -21,7 +21,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/detallecronogramas")
+@RequestMapping("api/detallecronogramas")
 public class DetalleCronogramaController {
 
 	@Autowired

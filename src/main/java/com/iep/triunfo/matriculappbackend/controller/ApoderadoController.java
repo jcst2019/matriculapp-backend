@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/apoderados")
+@RequestMapping("api/apoderados")
 public class ApoderadoController {
 
 	@Autowired

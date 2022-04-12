@@ -18,7 +18,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/programacion/matriculas")
+@RequestMapping("api/programacion/matriculas")
 public class ProgramacionMatriculaController {
 
 	@Autowired
