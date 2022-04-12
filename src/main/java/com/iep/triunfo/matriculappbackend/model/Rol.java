@@ -17,6 +17,9 @@ public class Rol {
 	@Column(name = "nombres", nullable = false, length = 70)
 	private String nombre;
 
+	@Column(name = "descripcion", nullable = true, length = 250)
+	private String descripcion;
+
 	public Integer getIdRol() {
 		return idRol;
 	}
@@ -33,4 +36,11 @@ public class Rol {
 		this.nombre = nombre;
 	}
 
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 }
