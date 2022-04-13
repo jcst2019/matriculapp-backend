@@ -1,5 +1,7 @@
 package com.iep.triunfo.matriculappbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -72,5 +74,4 @@ public class Menu {
 	public void setRoles(List<Rol> roles) {
 		this.roles = roles;
 	}
-
 }
