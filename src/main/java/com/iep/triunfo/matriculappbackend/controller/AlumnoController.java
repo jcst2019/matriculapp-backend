@@ -7,6 +7,7 @@ import com.iep.triunfo.matriculappbackend.service.IAlumnoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -24,6 +25,7 @@ public class AlumnoController {
 	@Autowired
 	private IAlumnoService service;
 
+	@PreAuthorize("@authServiceImpl.tieneAcceso('listar')")
 	@GetMapping("/listar")
 	public ResponseEntity<List<Alumno>> listar() {
 
