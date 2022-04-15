@@ -1,5 +1,6 @@
 package com.iep.triunfo.matriculappbackend.controller;
 
+import com.iep.triunfo.matriculappbackend.dto.ConsultaResumenPagoDTO;
 import com.iep.triunfo.matriculappbackend.exception.ModeloNotFoundException;
 import com.iep.triunfo.matriculappbackend.model.Alumno;
 import com.iep.triunfo.matriculappbackend.model.Pago;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -97,5 +99,15 @@ public class PagoController {
 		service.eliminar(id);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
+
+	//Servicio para Generar el reporte de Pagos
+
+	@GetMapping(value = "/listarResumenPagos")
+	public ResponseEntity<List<ConsultaResumenPagoDTO>> listarResumenPagos() {
+		List<ConsultaResumenPagoDTO> consultas = new ArrayList<>();
+		consultas = service.listarResumenPagos();
+		return new ResponseEntity<List<ConsultaResumenPagoDTO>>(consultas, HttpStatus.OK);
+	}
+
 
 }
