@@ -25,8 +25,8 @@ public class Pago {
     private String descripcion;
 
      //1 = Pago Matricula  2 = Pago Mensualidad 3= Otros
-    @Column(name = "concepto", nullable = false)
-    private Integer concepto;
+    @Column(name = "ind_tipo_pago", nullable = false)
+    private Integer indTipoPago;
 
     //@Column(name = "id_detalle_cronograma", nullable = false)
     //private Long idDetalleCronograma;
@@ -67,14 +67,6 @@ public class Pago {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Integer getConcepto() {
-        return concepto;
-    }
-
-    public void setConcepto(Integer concepto) {
-        this.concepto = concepto;
     }
 
     public Cronograma getCronograma() {
@@ -123,5 +115,13 @@ public class Pago {
 
     public void setFechaRegistro(LocalDateTime fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
+    }
+
+    public Integer getIndTipoPago() {
+        return indTipoPago;
+    }
+
+    public void setIndTipoPago(Integer indTipoPago) {
+        this.indTipoPago = indTipoPago;
     }
 }
