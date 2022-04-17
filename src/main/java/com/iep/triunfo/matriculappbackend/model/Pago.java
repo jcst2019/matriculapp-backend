@@ -27,6 +27,7 @@ public class Pago {
      //1 = Pago Matricula  2 = Pago Mensualidad 3= Otros
     @Column(name = "ind_tipo_pago", nullable = false)
     private Integer indTipoPago;
+   //Prueba
 
     //@Column(name = "id_detalle_cronograma", nullable = false)
     //private Long idDetalleCronograma;
