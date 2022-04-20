@@ -144,4 +144,5 @@ public class Cronograma {
     public void setDetalleCronograma(List<DetalleCronograma> detalleCronograma) {
         this.detalleCronograma = detalleCronograma;
     }
+
 }

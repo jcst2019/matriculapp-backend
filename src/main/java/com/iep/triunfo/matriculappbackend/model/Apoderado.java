@@ -31,10 +31,13 @@ public class Apoderado {
     @Column(name="tipo", nullable = true)
     private Integer tipo;
 
-    @Schema(description = "DNI debe de Tener mínimo 8 caracteres")
-    @Size(min = 8, max = 8, message = "DNI debe de Tener mínimo 8 caracteres")
-    @Column(name="dni", nullable = false, length = 8)
-    private String dni;
+    @Schema(description = "Tipo de Documento")
+    @Column(name="tipo_documento", nullable = false)
+    private Integer tipoDocumento;
+
+    @Schema(description = "Número de Documento")
+    @Column(name="num_documento", nullable = false)
+    private String numDocumento;
 
     @Schema(description = "Dirección debe de Tener mínimo 200 caracteres")
     @Size(min = 3, max = 200, message = "Dirección debe de Tener mínimo 200 caracteres")
@@ -96,14 +99,6 @@ public class Apoderado {
         this.tipo = tipo;
     }
 
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
     public String getDireccion() {
         return direccion;
     }
@@ -136,12 +131,43 @@ public class Apoderado {
         this.email = email;
     }
 
-
     public Integer getEstado() {
         return estado;
     }
 
     public void setEstado(Integer estado) {
         this.estado = estado;
+    }
+
+    public Integer getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(Integer tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+
+    public String getNumDocumento() {
+        return numDocumento;
+    }
+
+    public void setNumDocumento(String numDocumento) {
+        this.numDocumento = numDocumento;
+    }
+
+    public LocalDateTime getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public LocalDateTime getFechaModificacion() {
+        return fechaModificacion;
+    }
+
+    public void setFechaModificacion(LocalDateTime fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
     }
 }

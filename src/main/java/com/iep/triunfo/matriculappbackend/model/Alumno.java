@@ -45,10 +45,13 @@ public class Alumno {
     @Column(name="genero", nullable = true)
     private Integer genero;
 
-    @Schema(description = "DNI debe de Tener mínimo 8 caracteres")
-    @Size(min = 8, max = 8, message = "DNI debe de Tener mínimo 8 caracteres")
-    @Column(name="dni", nullable = false, length = 8)
-    private String dni;
+    @Schema(description = "Tipo de Documento")
+    @Column(name="tipo_documento", nullable = false)
+    private Integer tipoDocumento;
+
+    @Schema(description = "Número de Documento")
+    @Column(name="num_documento", nullable = false)
+    private String numDocumento;
 
     @Schema(description = "Dirección debe de Tener mínimo 200 caracteres")
     @Size(min = 3, max = 200, message = "Dirección debe de Tener mínimo 200 caracteres")
@@ -117,14 +120,6 @@ public class Alumno {
         this.genero = genero;
     }
 
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
     public String getDireccion() {
         return direccion;
     }
@@ -187,5 +182,21 @@ public class Alumno {
 
     public void setEstado(Integer estado) {
         this.estado = estado;
+    }
+
+    public Integer getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(Integer tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+
+    public String getNumDocumento() {
+        return numDocumento;
+    }
+
+    public void setNumDocumento(String numDocumento) {
+        this.numDocumento = numDocumento;
     }
 }
