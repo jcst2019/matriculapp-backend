@@ -1,5 +1,6 @@
 package com.iep.triunfo.matriculappbackend.model;
 
+import com.iep.triunfo.matriculappbackend.util.Util;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.persistence.*;
@@ -48,7 +49,7 @@ public class Cronograma {
         meses.add("10");
         meses.add("11");
         meses.add("12");
-        detalleCronogramaMatricula.setEstado(0);
+        detalleCronogramaMatricula.setEstado(ESTADO_CRONOGRAMA_REGISTRADO);
         detalleCronogramaMatricula.setFechaRegistro(LocalDateTime.now());
         detalleCronogramaMatricula.setFechaModificacion(LocalDateTime.now());
         //Registrar en el cronograma la Matricula

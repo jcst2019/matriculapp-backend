@@ -21,4 +21,27 @@ public class Util {
    public static final float D_DEPORTISTA_CALIFICADO=0.8F;
    public static final float D_MUSICO_CALIFICADO=0.6F;
 
+    //Estados de la Programación Académica
+
+    public static final int ESTADO_PROG_ACADEMICA_ABIERTO = 1;
+    public static final int ESTADO_PROG_ACADEMICA_CERRADO = 2;
+    public static final int ESTADO_PROG_ACADEMICA_ANULADO = 3;
+
+    //Estados de la Matrícula
+
+    public static final int ESTADO_MATRICULA_REGISTRADO = 1;
+    public static final int ESTADO_MATRICULA_CERRADO = 2;
+    public static final int ESTADO_MATRICULA_ANULADO = 3;
+
+    //Estados del Cronograma
+
+    public static final int ESTADO_CRONOGRAMA_REGISTRADO = 1;
+    public static final int ESTADO_CRONOGRAMA_CERRADO = 2;
+    public static final int ESTADO_CRONOGRAMA_ANULADO = 3;
+
+    //TIPOS DE PAGO
+    public static final int TIPO_PAGO_MATRICULA = 1;
+    public static final int TIPO_PAGO_MENSUALIDAD = 2;
+    public static final int TIPO_PAGO_OTROS = 3;
+
 }

@@ -30,12 +30,12 @@ public class Alumno {
     private List<Apoderado> apoderados;
 
     @Schema(description = "Nombre debe de Tener mínimo 70 caracteres")
-    @Size(min = 3, message = "Nombre debe de Tener mínimo 3 caracteres")
+    @Size(min = 2, message = "Nombre debe de Tener mínimo 2 caracteres")
     @Column(name="nombres", nullable = false, length = 70)
     private String nombre;
 
     @Schema(description = "Apellidos debe de Tener mínimo 70 caracteres")
-    @Size(min = 3, message = "Apellidos debe de Tener mínimo 3 caracteres")
+    @Size(min = 2, message = "Apellidos debe de Tener mínimo 2 caracteres")
     @Column(name="apellidos", nullable = false, length = 70)
     private String apellidos;
 
@@ -50,7 +50,7 @@ public class Alumno {
     private Integer tipoDocumento;
 
     @Schema(description = "Número de Documento")
-    @Column(name="num_documento", nullable = false)
+    @Column(name="num_documento", nullable = false, length = 15)
     private String numDocumento;
 
     @Schema(description = "Dirección debe de Tener mínimo 200 caracteres")

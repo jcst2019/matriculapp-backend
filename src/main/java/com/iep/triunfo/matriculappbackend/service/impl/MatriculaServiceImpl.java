@@ -1,11 +1,15 @@
 package com.iep.triunfo.matriculappbackend.service.impl;
 
 import com.iep.triunfo.matriculappbackend.model.Alumno;
+import com.iep.triunfo.matriculappbackend.model.Cronograma;
 import com.iep.triunfo.matriculappbackend.model.Matricula;
+import com.iep.triunfo.matriculappbackend.model.ProgramacionMatricula;
 import com.iep.triunfo.matriculappbackend.repo.IAlumnoRepo;
+import com.iep.triunfo.matriculappbackend.repo.ICronogramaRepo;
 import com.iep.triunfo.matriculappbackend.repo.IMatriculaRepo;
 import com.iep.triunfo.matriculappbackend.service.IAlumnoService;
 import com.iep.triunfo.matriculappbackend.service.IMatriculaService;
+import com.iep.triunfo.matriculappbackend.util.Util;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -32,6 +36,9 @@ public class MatriculaServiceImpl implements IMatriculaService {
 
     @Autowired
     private IMatriculaRepo repo;
+
+    @Autowired
+    private ICronogramaRepo repoCronograma;
 
     //@Value("classpath:/constancia.jasper") // Do not use field injection
     //private Resource resource;
@@ -167,6 +174,21 @@ public class MatriculaServiceImpl implements IMatriculaService {
         }
 
         return data;
+    }
+
+    @Override
+    public Matricula actualizarEstadoAnulado(Matricula matricula) {
+        //Anulamos el cronograma
+        Cronograma cronograma = repoCronograma.listarCronogramaPorMatricula(matricula.getIdMatricula());
+        cronograma.setEstado(Util.ESTADO_CRONOGRAMA_ANULADO);
+        repoCronograma.save(cronograma);
+        //Anulamos la matrícula
+        Matricula obj = listarPorId(matricula.getIdMatricula());
+        obj.setEstado(Util.ESTADO_MATRICULA_ANULADO);
+
+
+
+        return repo.save(obj);
     }
 
     public void copyToFile(InputStream inputStream, File file) throws IOException {

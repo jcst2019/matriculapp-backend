@@ -10,6 +10,7 @@ import com.iep.triunfo.matriculappbackend.service.IAlumnoService;
 import com.iep.triunfo.matriculappbackend.service.ICronogramaService;
 import com.iep.triunfo.matriculappbackend.service.IMatriculaService;
 import com.iep.triunfo.matriculappbackend.service.IPorgramacionMatriculaService;
+import com.iep.triunfo.matriculappbackend.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -82,13 +83,16 @@ public class MatriculaController {
 		Matricula p = service.registrar(matricula);
         //Registramos el Cronograma
 		cronograma.setMatricula(p);
-		cronograma.setEstado(0);
+		cronograma.setEstado(Util.ESTADO_CRONOGRAMA_REGISTRADO);
 		cronograma.setFechaCronograma(LocalDateTime.now());
 		cronograma.generarDetalleCronograma(matricula);
 		Cronograma c = serviceCronograma.registrar(cronograma);
 		//Actualizamos la cantidad de Cupos Matriculados
-		ProgramacionMatricula progActualizado = serviceProgramacionMatricula.listarPorId(matricula.getProgramacionMatricula().getIdProgMatricula());
-		progActualizado = serviceProgramacionMatricula.actualizarCantidadCupos(progActualizado);
+		ProgramacionMatricula progActualizado1 = serviceProgramacionMatricula.listarPorId(matricula.getProgramacionMatricula().getIdProgMatricula());
+		progActualizado1 = serviceProgramacionMatricula.actualizarCantidadCupos(progActualizado1);
+		//Actualizamos el estado Cerrado si llenamos los cupos
+		ProgramacionMatricula progActualizado2 = serviceProgramacionMatricula.listarPorId(matricula.getProgramacionMatricula().getIdProgMatricula());
+		progActualizado2 = serviceProgramacionMatricula.actualizarEstadoCerrado(progActualizado2);
 		// return new ResponseEntity<Paciente>(p, HttpStatus.CREATED);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getIdMatricula())
 				.toUri();
@@ -105,6 +109,28 @@ public class MatriculaController {
 
 	}
 
+	@GetMapping("/actualizaEstadoAnulado/{id}")
+	public ResponseEntity<Matricula> actualizaEstadoAnulado(@PathVariable("id") Integer id) {
+
+		Matricula p = service.listarPorId(id);
+
+		if (p.getIdMatricula() == null) {
+
+			throw new ModeloNotFoundException("Id No encontrado " + id);
+
+		}
+		service.actualizarEstadoAnulado(p);
+
+		return new ResponseEntity<Matricula>(HttpStatus.CREATED);
+	}
+
+	@GetMapping(value = "/generarConstanciaMatricula/{id}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public ResponseEntity<byte[]> generarConstanciaMatricula(@PathVariable("id") Integer id) {
+		byte[] data = null;
+		data = service.generarConstanciaMatricula(id);
+		return new ResponseEntity<byte[]>(data, HttpStatus.OK);
+	}
+
 	@DeleteMapping("/eliminar/{id}")
 	public ResponseEntity<Object> eliminar(@PathVariable("id") Integer id) {
 
@@ -117,13 +143,6 @@ public class MatriculaController {
 		}
 		service.eliminar(id);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
-	}
-
-	@GetMapping(value = "/generarConstanciaMatricula/{id}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-	public ResponseEntity<byte[]> generarConstanciaMatricula(@PathVariable("id") Integer id) {
-		byte[] data = null;
-		data = service.generarConstanciaMatricula(id);
-		return new ResponseEntity<byte[]>(data, HttpStatus.OK);
 	}
 
 }
