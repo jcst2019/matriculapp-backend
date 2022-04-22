@@ -1,6 +1,9 @@
 package com.iep.triunfo.matriculappbackend.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -11,7 +14,7 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idUsuario;
 
-	@Column(name = "nombres", nullable = false, unique = true)
+	@Column(name = "username", nullable = false, unique = true)
 	private String username;
 
 	@Column(name = "clave", nullable = false)
@@ -19,6 +22,18 @@ public class Usuario {
 
 	@Column(name = "estado", nullable = false)
 	private String enabled;
+
+	@Column(name="nombres", nullable = false, length = 70)
+	private String nombre;
+
+	@Column(name="apellidos", nullable = false, length = 70)
+	private String apellidos;
+
+	@Column(name="tipo_documento", nullable = false)
+	private Integer tipoDocumento;
+
+	@Column(name="num_documento", nullable = false, length = 15)
+	private String numDocumento;
 
 	@ManyToMany(fetch = FetchType.EAGER) // Porque es poca data se carga en la lista roles y se usa EAGER
 	@JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "idUsuario"), inverseJoinColumns = @JoinColumn(name = "id_rol", referencedColumnName = "idRol"))
@@ -62,5 +77,37 @@ public class Usuario {
 
 	public void setRoles(List<Rol> roles) {
 		this.roles = roles;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public Integer getTipoDocumento() {
+		return tipoDocumento;
+	}
+
+	public void setTipoDocumento(Integer tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
+	}
+
+	public String getNumDocumento() {
+		return numDocumento;
+	}
+
+	public void setNumDocumento(String numDocumento) {
+		this.numDocumento = numDocumento;
 	}
 }
