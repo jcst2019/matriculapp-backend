@@ -1,5 +1,6 @@
 package com.iep.triunfo.matriculappbackend.controller;
 
+import com.iep.triunfo.matriculappbackend.dto.FiltroAlumnoDTO;
 import com.iep.triunfo.matriculappbackend.exception.ModeloNotFoundException;
 import com.iep.triunfo.matriculappbackend.model.Alumno;
 import com.iep.triunfo.matriculappbackend.model.Cronograma;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -106,6 +108,27 @@ public class AlumnoController {
 		}
 		service.eliminar(id);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+	}
+
+	@PostMapping("/buscar")
+	public ResponseEntity<List<Alumno>> buscar(@RequestBody FiltroAlumnoDTO filtro) {
+		List<Alumno> alumnos = new ArrayList<>();
+
+		if (filtro != null) {
+			if ((filtro.getFechaIngreso() != null) ||
+					(filtro.getFechaNacimiento()!= null)) {
+				alumnos = service.filtrarFechasAlumnos(filtro);
+			} else {
+				if(filtro.getNombre()=="" || filtro.getNombre().length() == 0){
+					filtro.setNombre(null);
+				}
+				if(filtro.getApellidos()=="" || filtro.getApellidos().length() == 0){
+					filtro.setApellidos(null);
+				}
+				alumnos = service.filtrarAlumnos(filtro);
+			}
+		}
+		return new ResponseEntity<List<Alumno>>(alumnos, HttpStatus.OK);
 	}
 
 }
