@@ -6,19 +6,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "rol")
 public class Rol {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idRol;
 
-	@Column(name = "nombres", nullable = false, length = 70)
-	private String nombre;
+	@Column(name = "rol", nullable = false, length = 70)
+	private String rol;
 
 	@Column(name = "descripcion", nullable = true, length = 250)
 	private String descripcion;
+
+	@Column(name = "fecha_registro", nullable = true)
+	private LocalDateTime fechaRegistro;
+
+	@Column(name = "estado", nullable = true)
+	private Integer estado;
 
 	public Integer getIdRol() {
 		return idRol;
@@ -28,12 +36,12 @@ public class Rol {
 		this.idRol = idRol;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getRol() {
+		return rol;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 
 	public String getDescripcion() {
@@ -42,5 +50,21 @@ public class Rol {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public LocalDateTime getFechaRegistro() {
+		return fechaRegistro;
+	}
+
+	public void setFechaRegistro(LocalDateTime fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
+	}
+
+	public Integer getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Integer estado) {
+		this.estado = estado;
 	}
 }

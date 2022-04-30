@@ -22,6 +22,9 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -44,8 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	private UserDetailsService userDetailsService;		
 	
 	@Autowired
-	private DataSource dataSource;	
-	
+	private DataSource dataSource;
+
 	@Bean
 	public BCryptPasswordEncoder passwordEnconder() {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();

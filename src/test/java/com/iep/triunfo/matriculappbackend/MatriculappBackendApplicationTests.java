@@ -26,7 +26,7 @@ class MatriculappBackendApplicationTests {
 		us.setUsername("sunat");
 		us.setPassword(bcrypt.encode("123"));
 		us.setEnabled(String.valueOf(true));
-
+		//us.setEstado(1);
 		Usuario retorno = repo.save(us);
 
 		assertTrue(retorno.getPassword().equalsIgnoreCase(us.getPassword()));

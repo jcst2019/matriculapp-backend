@@ -44,4 +44,8 @@ public class Util {
     public static final int TIPO_PAGO_MENSUALIDAD = 2;
     public static final int TIPO_PAGO_OTROS = 3;
 
+    //Estados del ROL
+    public static final int ESTADO_ROL_REGISTRADO = 1;
+    public static final int ESTADO_ROL_ANULADO = 2;
+
 }

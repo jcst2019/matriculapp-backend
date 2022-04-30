@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -34,6 +35,9 @@ public class Usuario {
 
 	@Column(name="num_documento", nullable = false, length = 15)
 	private String numDocumento;
+
+	@Column(name = "fecha_registro", nullable = true)
+	private LocalDateTime fechaRegistro;
 
 	@ManyToMany(fetch = FetchType.EAGER) // Porque es poca data se carga en la lista roles y se usa EAGER
 	@JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "idUsuario"), inverseJoinColumns = @JoinColumn(name = "id_rol", referencedColumnName = "idRol"))
@@ -109,5 +113,13 @@ public class Usuario {
 
 	public void setNumDocumento(String numDocumento) {
 		this.numDocumento = numDocumento;
+	}
+
+	public LocalDateTime getFechaRegistro() {
+		return fechaRegistro;
+	}
+
+	public void setFechaRegistro(LocalDateTime fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
 	}
 }
