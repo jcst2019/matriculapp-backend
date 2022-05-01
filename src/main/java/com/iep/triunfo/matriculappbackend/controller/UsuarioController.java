@@ -90,5 +90,16 @@ public class UsuarioController {
 		service.eliminar(id);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
+	@PostMapping("/actualizarPassword")
+	public ResponseEntity<Object> actualizarPassword(@Valid @RequestBody Usuario usuario) {
+
+		Usuario p = service.actualizarPassword(usuario);
+		// return new ResponseEntity<Paciente>(p, HttpStatus.CREATED);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getIdUsuario())
+				.toUri();
+
+		return ResponseEntity.created(location).build();
+
+	}
 
 }

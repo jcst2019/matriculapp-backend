@@ -83,4 +83,11 @@ public class UsuarioServiceImpl implements UserDetailsService, IUsuarioService {
 		repo.deleteById(id);
 		return true;
 	}
+
+	@Override
+	public Usuario actualizarPassword(Usuario usuario) {
+		Optional<Usuario> user = repo.findById(usuario.getIdUsuario());
+		user.get().setPassword(passwordEncoder.encode(usuario.getPassword()));
+		return repo.save(user.get());
+	}
 }
