@@ -26,6 +26,7 @@ public class UsuarioController {
 	
 	@Autowired
 	private IUsuarioRepo repo; //Debería de ser un Service
+
 	@Autowired
 	private IUsuarioService service;
 
@@ -71,7 +72,7 @@ public class UsuarioController {
 	@PutMapping("/modificar")
 	public ResponseEntity<Usuario> modificar(@Valid @RequestBody Usuario usuario) {
 
-		Usuario p = service.registrar(usuario);
+		Usuario p = service.modificar(usuario);
 		return new ResponseEntity<Usuario>(p, HttpStatus.CREATED);
 
 	}

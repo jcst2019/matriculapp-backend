@@ -24,16 +24,16 @@ public class Usuario {
 	@Column(name = "estado", nullable = false)
 	private String enabled;
 
-	@Column(name="nombres", nullable = false, length = 70)
+	@Column(name="nombres", nullable = true, length = 70)
 	private String nombre;
 
-	@Column(name="apellidos", nullable = false, length = 70)
+	@Column(name="apellidos", nullable = true, length = 70)
 	private String apellidos;
 
-	@Column(name="tipo_documento", nullable = false)
+	@Column(name="tipo_documento", nullable = true)
 	private Integer tipoDocumento;
 
-	@Column(name="num_documento", nullable = false, length = 15)
+	@Column(name="num_documento", nullable = true, length = 15)
 	private String numDocumento;
 
 	@Column(name = "fecha_registro", nullable = true)

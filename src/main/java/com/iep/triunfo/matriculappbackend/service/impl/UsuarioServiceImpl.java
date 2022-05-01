@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.iep.triunfo.matriculappbackend.AuthorizationServer;
+import com.iep.triunfo.matriculappbackend.SecurityConfig;
 import com.iep.triunfo.matriculappbackend.model.Alumno;
 import com.iep.triunfo.matriculappbackend.model.Rol;
 import com.iep.triunfo.matriculappbackend.model.Usuario;
@@ -12,6 +13,7 @@ import com.iep.triunfo.matriculappbackend.repo.IUsuarioRepo;
 import com.iep.triunfo.matriculappbackend.service.IRolService;
 import com.iep.triunfo.matriculappbackend.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,8 +30,10 @@ public class UsuarioServiceImpl implements UserDetailsService, IUsuarioService {
 	@Autowired
 	private IUsuarioRepo repo;
 
+	@Lazy
+	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
@@ -54,7 +58,7 @@ public class UsuarioServiceImpl implements UserDetailsService, IUsuarioService {
 	@Override
 	public Usuario registrar(Usuario obj) {
 
-		//obj.setPassword(passwordEncoder.encode(obj.getPassword()));
+		obj.setPassword(passwordEncoder.encode(obj.getPassword()));
 		return repo.save(obj);
 	}
 
