@@ -38,4 +38,27 @@ public class MenuServiceImpl extends GenericServiceImpl<Menu, Integer> implement
 		return repo.listarMenuPorUsuario(nombre);
 	}
 
+	@Override
+	public List<Menu> listarMenuPorRol(Integer idRol) {
+		return repo.listarMenuPorRol(idRol);
+	}
+
+	@Override
+	public List<Menu> regsitrarMenuPorRol(List<Menu> listaMenu) {
+		//Obtenemos el idRol (Siempre será 1, por ello lo obtenemos del indice 0)
+		Integer iddRol =listaMenu.get(0).getRoles().get(0).getIdRol();
+
+		listaMenu.forEach((final Menu menu) -> repo.insertarMenuPorRol(menu.getIdMenu(),iddRol));
+
+		return null;
+	}
+
+	@Override
+	public List<Menu> borrarMenuPorRol(Integer idRol) {
+
+		repo.borrarMenuPorRol(idRol);
+		return null;
+	}
+
+
 }

@@ -37,4 +37,28 @@ public class MenuController {
 		return new ResponseEntity<List<Menu>>(menus, HttpStatus.OK);
 	}
 
+	@PostMapping("/roles")
+	public ResponseEntity<List<Menu>> listarPorRol(@RequestBody Integer idRol) throws Exception{
+		List<Menu> menus = new ArrayList<>();
+		menus = service.listarMenuPorRol(idRol);
+		return new ResponseEntity<List<Menu>>(menus, HttpStatus.OK);
+	}
+
+	@PostMapping("/borrarMenuPorRol")
+	public ResponseEntity<List<Menu>> borrarMenuPorRol(@RequestBody Integer idRol) throws Exception{
+		List<Menu> menus = new ArrayList<>();
+		menus =  service.borrarMenuPorRol(idRol);
+		return new ResponseEntity<List<Menu>>(menus, HttpStatus.OK);
+	}
+
+	@PostMapping("/registrarMenuPorRol")
+	public ResponseEntity<List<Menu>> registrarMenuPorRol(@RequestBody List<Menu> listaMenu) throws Exception{
+
+		List<Menu> menus = new ArrayList<>();
+
+		service.regsitrarMenuPorRol(listaMenu);
+
+		return new ResponseEntity<List<Menu>>(menus, HttpStatus.OK);
+	}
+
 }
