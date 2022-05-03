@@ -26,11 +26,12 @@ public class ProgramacionMatricula {
     @Schema(description = "Código de Matrícula debe de Tener mínimo 4 caracteres")
     @Size(min = 4, message = "Código de Matrícula debe de Tener mínimo 4 caracteres")
     @Column(name = "codigo_matricula", nullable = false, length = 70)
-    private String codigoMatricula;
+    private String codigoMatricula;  //El código de Matrícula representará al campo Descripción en la interfaz de Programación.
 
-    @Schema(description = "Descripción debe de Tener máximo 200 caracteres")
-    @Column(name = "descripcion", nullable = true, length = 200)
-    private String Descripcion;
+    // Por recomendación del Ing. Arturo Sandoval se omite el campo Descripción
+    //@Schema(description = "Descripción debe de Tener máximo 200 caracteres")
+    //@Column(name = "descripcion", nullable = true, length = 200)
+    //private String Descripcion;
 
     @Schema(description = "Cantidad de Cupos Total debe de Tener mínimo 1 dígito")
     @Min(1)
@@ -86,14 +87,6 @@ public class ProgramacionMatricula {
 
     public void setCodigoMatricula(String codigoMatricula) {
         this.codigoMatricula = codigoMatricula;
-    }
-
-    public String getDescripcion() {
-        return Descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        Descripcion = descripcion;
     }
 
     public Integer getCantidadCuposTotal() {

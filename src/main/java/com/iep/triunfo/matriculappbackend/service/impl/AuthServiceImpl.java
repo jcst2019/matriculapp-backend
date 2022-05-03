@@ -15,11 +15,11 @@ public class AuthServiceImpl {
 		
 		switch (path) {
 		case "listar":
-				metodoRol = "ADMIN,USER";
+				metodoRol = "ADMIN,DIRECTOR,SECRETARIA";
 			break;
 
 		case "listarId":
-				metodoRol = "ADMIN,USER,DBA";
+				metodoRol = "ADMIN,DIRECTOR,SECRETARIA,DBA";
 			break;
 		}
 		
