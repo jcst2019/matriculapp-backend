@@ -8,5 +8,6 @@ import java.util.List;
 public interface IPagoService extends ICRUD<Pago, Integer>{
 
     List<ConsultaResumenPagoDTO> listarResumenPagos();
+    byte[] generarConstanciaPago(Integer id);
 }
 

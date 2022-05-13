@@ -149,7 +149,7 @@ public class MatriculaServiceImpl implements IMatriculaService {
     @Override
     public byte[] generarConstanciaMatricula(Integer id) {
 
-        Resource resource = resourceLoader.getResource("classpath:constancia.jasper");
+        Resource resource = resourceLoader.getResource("classpath:ConstanciaMatricula.jasper");
         ClassLoader classLoader = getClass().getClassLoader();
 
         byte[] data = null;
@@ -158,7 +158,7 @@ public class MatriculaServiceImpl implements IMatriculaService {
             //File file = new ClassPathResource("/reports/constancia.jasper").getFile();//Funciona Pero en el despliegue NO. No encuentra la ruta de la carpeta resource
             //JasperPrint print = JasperFillManager.fillReport(file.getPath(), null, new JRBeanCollectionDataSource(Collections.singleton(this.listarPorId(id))));
             //InputStream input = resource.getInputStream();
-            InputStream input =  classLoader.getResourceAsStream("constancia.jasper");
+            InputStream input =  classLoader.getResourceAsStream("ConstanciaMatricula.jasper");
             //readFromInputStream(input);
             //reader = new BufferedReader(new InputStreamReader(input));
             //byte[] buffer = new byte[input.available()];
